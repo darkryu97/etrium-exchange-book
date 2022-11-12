@@ -3,7 +3,7 @@ package br.com.sekai.book_exchange.service
 import br.com.sekai.book_exchange.data.vo.v1.BookVO
 import br.com.sekai.book_exchange.exceptions.ResourceNotFoundException
 import br.com.sekai.book_exchange.mapper.DozerMapper
-import br.com.sekai.book_exchange.mapper.bookListToListBookVO
+import br.com.sekai.book_exchange.mapper.toArrayVO
 import br.com.sekai.book_exchange.model.Book
 import br.com.sekai.book_exchange.repository.BookRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +19,7 @@ class BookService {
 
     fun findAll(): List<BookVO>{
         logger.info("FINDING ALL BOOKS!!")
-        return bookListToListBookVO(bookRepository.findAll() as ArrayList<Book>)
+        return bookRepository.findAll().toArrayVO()
 //        return DozerMapper.parserListObject(bookRepository.findAll(), BookVO::class.java)
     }
 

@@ -12,7 +12,4 @@ data class BookVO (
     var publisher : String= "",
     var imgURL : String= "",
     var resume : String= "",
-    var postsVO: PostsVO? = null
-
-
     )

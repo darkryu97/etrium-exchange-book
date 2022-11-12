@@ -2,6 +2,7 @@ package br.com.sekai.book_exchange.mapper
 
 
 import br.com.sekai.book_exchange.data.vo.v1.PostsVO
+import br.com.sekai.book_exchange.model.Book
 
 import br.com.sekai.book_exchange.model.Posts
 
@@ -18,11 +19,6 @@ fun listPostsVOToListPosts(postsVO: ArrayList<PostsVO>): ArrayList<Posts> {
 
     return toPosts
 }
-fun listPostsToListPostsVO(posts: ArrayList<Posts>): ArrayList<PostsVO> {
-        val postsVO = ArrayList<PostsVO>()
-        posts.forEach { post ->
-           postsVO.add( post.toVO())
-        }
 
-    return postsVO
-}
+fun MutableList<Posts>.toArrayVO( ) : List<PostsVO> = this.map { it.toVO() }
+fun MutableList<PostsVO>.toArrayEntity(): List<Posts> = this.map{it.toEntity()}

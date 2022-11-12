@@ -14,11 +14,5 @@ fun bookVOListToListBook(booksVO: ArrayList<BookVO>): ArrayList<Book> {
 
     return toBook
 }
-fun bookListToListBookVO(booksList: ArrayList<Book>): ArrayList<BookVO> {
-        val bookVo = ArrayList<BookVO>()
-        booksList.forEach { book ->
-           bookVo.add( book.toVO())
-        }
+fun MutableList<Book>.toArrayVO(): List<BookVO> = this.map { it.toVO() }
 
-    return bookVo
-}

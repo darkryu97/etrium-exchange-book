@@ -3,7 +3,8 @@ package br.com.sekai.book_exchange.service
 import br.com.sekai.book_exchange.data.vo.v1.PostsVO
 import br.com.sekai.book_exchange.exceptions.ResourceNotFoundException
 import br.com.sekai.book_exchange.mapper.DozerMapper
-import br.com.sekai.book_exchange.mapper.listPostsToListPostsVO
+
+import br.com.sekai.book_exchange.mapper.toArrayVO
 import br.com.sekai.book_exchange.model.Posts
 import br.com.sekai.book_exchange.repository.PostsRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +20,8 @@ class PostService {
 
     fun findAll(): List<PostsVO>{
         logger.info("FINDING ALL POSTS!!")
-        return listPostsToListPostsVO(postsRepository.findAll() as ArrayList<Posts>)
+        val posts = postsRepository.findAll()
+        return posts.toArrayVO()
 //        return DozerMapper.parserListObject(postsRepository.findAll(), PostsVO::class.java)
     }
 
