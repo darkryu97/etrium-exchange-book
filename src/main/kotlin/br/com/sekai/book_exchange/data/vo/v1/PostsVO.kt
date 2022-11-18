@@ -7,9 +7,6 @@ import com.github.dozermapper.core.Mapping
 
 
 data class PostsVO(
-    @Mapping("id")
-    @field:JsonProperty("id")
-    var key: Long = 0,
     var postCount: Int = 0,
     var date: String = "",
     var userID: UserVO= UserVO(),

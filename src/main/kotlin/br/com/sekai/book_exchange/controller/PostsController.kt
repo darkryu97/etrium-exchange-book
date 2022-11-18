@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@CrossOrigin(origins = ["http://127.0.0.1:5173/", "https://book-exchange-1kvv.vercel.app/"])
+@CrossOrigin(origins = ["http://127.0.0.1:5173/", "https://book-exchange-1kvv.vercel.app/", "http://127.0.0.1:8080/"])
 @RestController
 @RequestMapping("/api/posts/v1")
 class PostsController {

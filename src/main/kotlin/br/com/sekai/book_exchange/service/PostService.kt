@@ -38,19 +38,32 @@ class PostService {
         return DozerMapper.parserObject(postsRepository.save(post), PostsVO::class.java)
     }
 
-    fun update(PostsVO: PostsVO): PostsVO{
-        logger.info("UPDATE A BOOK WITH ID ${PostsVO.key}!!")
-        val post : Posts = postsRepository.findById(PostsVO.key).orElseThrow {
-            ResourceNotFoundException("POST WITH IS ID IS NOT FOUND!!")
-        }
-//        post.author = PostsVO.author
-//        post.imgURL= PostsVO.imgURL
-//        post.resume = PostsVO.resume
-//        post.publisher = PostsVO.publisher
-//        post.title= PostsVO.title
-
-        return DozerMapper.parserObject(postsRepository.save(post), PostsVO::class.java)
-    }
+//    fun update(PostsVO: PostsVO): PostsVO{
+//        logger.info("UPDATE A BOOK WITH ID ${PostsVO.bookID}${PostsVO.userID}!!")
+//        val post : Posts = postsRepository.findById(PostsVO.key).orElseThrow {
+//            ResourceNotFoundException("POST WITH IS ID IS NOT FOUND!!")
+//        }
+////        post.author = PostsVO.author
+////        post.imgURL= PostsVO.imgURL
+////        post.resume = PostsVO.resume
+////        post.publisher = PostsVO.publisher
+////        post.title= PostsVO.title
+//
+//        return DozerMapper.parserObject(postsRepository.save(post), PostsVO::class.java)
+//    }
+//    fun update(PostsVO: PostsVO): PostsVO{
+//        logger.info("UPDATE A BOOK WITH ID ${PostsVO.bookID}${PostsVO.userID}!!")
+//        val post : Posts = postsRepository.findById(PostsVO.key).orElseThrow {
+//            ResourceNotFoundException("POST WITH IS ID IS NOT FOUND!!")
+//        }
+////        post.author = PostsVO.author
+////        post.imgURL= PostsVO.imgURL
+////        post.resume = PostsVO.resume
+////        post.publisher = PostsVO.publisher
+////        post.title= PostsVO.title
+//
+//        return DozerMapper.parserObject(postsRepository.save(post), PostsVO::class.java)
+//    }
 
     fun delete(id: Long){
         logger.info("INSERT NEW POST!!")
