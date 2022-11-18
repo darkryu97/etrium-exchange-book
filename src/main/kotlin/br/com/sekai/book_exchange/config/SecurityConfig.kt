@@ -2,8 +2,6 @@ package br.com.sekai.book_exchange.config
 
 import br.com.sekai.book_exchange.security.jwt.JwtConfigurer
 import br.com.sekai.book_exchange.security.jwt.JwtTokenProvider
-import jakarta.servlet.Filter
-import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

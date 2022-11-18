@@ -1,6 +1,6 @@
 package br.com.sekai.book_exchange.model
 
-import jakarta.persistence.*
+import javax.persistence.*
 
 @Entity
 @Table(name="posts")
