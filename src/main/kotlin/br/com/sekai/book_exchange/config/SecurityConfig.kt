@@ -39,7 +39,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .authorizeRequests()
-            .antMatchers("/posts/**/", "/books/**/", "auth/sign", "auth/refresh").permitAll()
+            .antMatchers("/posts/**/", "/books/**/", "/auth/sign", "/auth/refresh").permitAll()
 //            .antMatchers().authenticated()
 //            .antMatchers().denyAll()
             .and()

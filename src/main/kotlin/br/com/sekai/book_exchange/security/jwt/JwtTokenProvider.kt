@@ -39,6 +39,7 @@ class JwtTokenProvider {
         algorithm = Algorithm.HMAC256(secretKey.toByteArray())
     }
 
+
     fun createAccessToken(email: String, roles: List<String?>): TokenVO {
 
         val now = Date()
@@ -55,6 +56,19 @@ class JwtTokenProvider {
             created = now,
             expiration = validity
         )
+    }
+
+    fun refreshToken(refreshToken: String): TokenVO {
+        var token = ""
+        if (refreshToken.contains("Bearer ")){
+            token = refreshToken.substring("Bearer ".length)
+        }
+        val verifier: JWTVerifier = JWT.require(algorithm).build()
+        var decodedJWT: DecodedJWT = verifier.verify(token)
+        val email = decodedJWT.subject
+        val roles: List<String> = decodedJWT.getClaim("roles").asList(String::class.java)
+        return createAccessToken(email, roles)
+
     }
     private fun getAcessToken(email: String, roles: List<String?>, now: Date, validity: Date): String {
         val issuerURL : String = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()

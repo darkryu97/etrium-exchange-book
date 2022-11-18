@@ -35,16 +35,27 @@ class AuthService {
             authenticationManager.authenticate(UsernamePasswordAuthenticationToken(email, password))
             val user = repository.findByEmail(email)
             val tokenResponse : TokenVO = if(user != null){
-                tokenProvider.createAccessToken(email, user.role)
+                tokenProvider.createAccessToken(email!!, user.role)
             }else{
                 throw UsernameNotFoundException("User with $email not found!")
             }
             ResponseEntity.ok(tokenResponse)
 
         }catch (e: AuthenticationException){
+            logger.info(data.password)
             throw BadCredentialsException("Invalid email or password!")
         }
     }
 
+    fun refreshToken(email: String, refreshToken: String): ResponseEntity<*>{
+        logger.info("Trying get refresh token to user $email")
+
+        val user = repository.findByEmail(email)
+        val tokenResponse: TokenVO = if(user !=null){
+            tokenProvider.refreshToken(refreshToken)
+        }else throw UsernameNotFoundException("invalid refresh token")
+
+        return ResponseEntity.ok(tokenResponse)
+    }
 
 }

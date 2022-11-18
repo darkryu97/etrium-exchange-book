@@ -24,7 +24,7 @@ class UserService(@field:Autowired var userRepository: UserRepository): UserDeta
     override fun loadUserByUsername(email: String?): UserDetails {
         logger.info("FINDING ONE USER WITH EMAIL!! ${email}")
         val user = userRepository.findByEmail(email)
-        return user?: throw UsernameNotFoundException("User with email '$email' not found")
+        return user ?: throw UsernameNotFoundException("User with email '$email' not found")
     }
 
 
