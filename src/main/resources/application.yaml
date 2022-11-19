@@ -1,19 +1,26 @@
-
+cors:
+  originPatterns: http://127.0.0.1:5173/, https://book-exchange-1kvv.vercel.app/, https://book-exchange-apii.herokuapp.com
 security:
   jwt:
     token:
-      secret-key: 73k2i
+      secret-key: ${JWT_SECRET}
       expire-length: 3600000
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/book_exchange?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}?useTimezone=true&serverTimezone=UTC
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
   jpa:
     hibernate:
         ddl-auto: none
     show-sql: false
+#migration
+  flyway:
+    user: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+    schemas: ${RDS_DB_NAME}
+
 #spring-doc:
 #  paths-to-match:
 #    - /api/**/v1/**
