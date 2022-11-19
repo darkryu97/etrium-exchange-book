@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:11.4
+    container_name: database-book
+    environment:
+      - POSTGRES_DB=book-exchange
+      - POSTGRES_PASSWORD=@bk-bk-sk-12
+      - POSTGRES_USER=bk-sekai
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/roles.sql:/docker-entrypoint-iniydb.d/roles.sql
+    restart: always

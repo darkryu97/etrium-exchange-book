@@ -1,6 +1,3 @@
-
-
-
 CREATE TABLE IF NOT EXISTS `book` (
                         `book_id` bigint NOT NULL AUTO_INCREMENT,
                         `author` varchar(180) NOT NULL,
