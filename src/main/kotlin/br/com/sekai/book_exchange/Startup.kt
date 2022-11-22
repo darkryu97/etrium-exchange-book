@@ -4,10 +4,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BookExhangeApplication
+class Startup
 
 fun main(args: Array<String>) {
-    runApplication<BookExhangeApplication>(*args)
+    runApplication<Startup>(*args)
 //
 //    /
 //    val encoders: MutableMap<String, PasswordEncoder> = HashMap()
