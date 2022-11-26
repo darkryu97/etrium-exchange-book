@@ -34,7 +34,13 @@ class AuthController {
                      @RequestHeader("Authorization") refreshToken: String? ): ResponseEntity<*> {
         return if (email.isNullOrBlank() || refreshToken.isNullOrBlank())
             ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Client Request")
-        else authService.refreshToken(email,refreshToken!!)
+        else authService.refreshToken(email,refreshToken)
 
     }
+
+    @GetMapping(value = ["/user/{email}"])
+    fun getUser(@PathVariable("email") email: String): UserVO{
+        return authService.getUserByEmail(email)
+    }
+
 }

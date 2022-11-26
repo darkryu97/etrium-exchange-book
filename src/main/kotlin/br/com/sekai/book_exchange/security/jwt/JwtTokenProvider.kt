@@ -64,7 +64,7 @@ class JwtTokenProvider {
             token = refreshToken.substring("Bearer ".length)
         }
         val verifier: JWTVerifier = JWT.require(algorithm).build()
-        var decodedJWT: DecodedJWT = verifier.verify(token)
+        val decodedJWT: DecodedJWT = verifier.verify(token)
         val email = decodedJWT.subject
         val roles: List<String> = decodedJWT.getClaim("roles").asList(String::class.java)
         return createAccessToken(email, roles)

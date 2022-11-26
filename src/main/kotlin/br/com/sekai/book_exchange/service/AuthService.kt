@@ -3,10 +3,8 @@ package br.com.sekai.book_exchange.service
 import br.com.sekai.book_exchange.data.vo.v1.AccountCredentialsVO
 import br.com.sekai.book_exchange.data.vo.v1.TokenVO
 import br.com.sekai.book_exchange.data.vo.v1.UserVO
-import br.com.sekai.book_exchange.mapper.toAccountCredentialsVO
 import br.com.sekai.book_exchange.mapper.toCreateEntity
-import br.com.sekai.book_exchange.mapper.toEntity
-import br.com.sekai.book_exchange.mapper.toVO
+import br.com.sekai.book_exchange.mapper.toVOnoPassword
 import br.com.sekai.book_exchange.model.User
 import br.com.sekai.book_exchange.repository.UserRepository
 import br.com.sekai.book_exchange.security.jwt.JwtTokenProvider
@@ -21,7 +19,6 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder
 import org.springframework.stereotype.Service
-import java.util.Base64.Decoder
 import java.util.logging.Logger
 
 @Service
@@ -61,7 +58,7 @@ class AuthService {
 //    cadastrar
     fun signUp(userVO: UserVO): ResponseEntity<*> {
         logger.info("Trying create new user with ${userVO.email}")
-    val userCredentialsVO: AccountCredentialsVO = AccountCredentialsVO(userVO.email,userVO.password)
+//    val userCredentialsVO = AccountCredentialsVO(userVO.email,userVO.password)
     val encoders: MutableMap<String, PasswordEncoder> = HashMap()
     encoders["pbkdf2"] = Pbkdf2PasswordEncoder()
     val passwordEncoder = DelegatingPasswordEncoder("pbkdf2", encoders)
@@ -85,6 +82,12 @@ class AuthService {
         }else throw UsernameNotFoundException("invalid refresh token")
 
         return ResponseEntity.ok(tokenResponse)
+    }
+
+    fun getUserByEmail(email: String): UserVO {
+        logger.info("get user by email");
+        return repository.findByEmail(email)?.toVOnoPassword() ?: throw UsernameNotFoundException("User not found")
+
     }
 
 }
