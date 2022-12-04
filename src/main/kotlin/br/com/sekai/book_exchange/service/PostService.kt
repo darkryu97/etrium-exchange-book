@@ -3,10 +3,13 @@ package br.com.sekai.book_exchange.service
 import br.com.sekai.book_exchange.data.vo.v1.PostsVO
 import br.com.sekai.book_exchange.exceptions.ResourceNotFoundException
 import br.com.sekai.book_exchange.mapper.DozerMapper
-
 import br.com.sekai.book_exchange.mapper.toArrayVO
+import br.com.sekai.book_exchange.mapper.toEntity
+import br.com.sekai.book_exchange.mapper.toVO
 import br.com.sekai.book_exchange.model.Posts
+import br.com.sekai.book_exchange.model.User
 import br.com.sekai.book_exchange.repository.PostsRepository
+import br.com.sekai.book_exchange.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
@@ -15,6 +18,8 @@ import java.util.logging.Logger
 class PostService {
     @Autowired
     private lateinit var postsRepository: PostsRepository
+    @Autowired
+    private lateinit var userRepository: UserRepository
 
     private val logger = Logger.getLogger(PostService::class.java.name)
 
@@ -31,11 +36,19 @@ class PostService {
         return DozerMapper.parserObject(post, PostsVO::class.java)
     }
 
-    fun createPosts(PostsVO: PostsVO): PostsVO{
+    fun createPosts(postsVO: PostsVO): PostsVO {
         logger.info("INSERT NEW POST!!")
-        val post: Posts = DozerMapper.parserObject(PostsVO, Posts::class.java)
+        val user: User? = userRepository.findByEmail(postsVO.userID.email)
 
-        return DozerMapper.parserObject(postsRepository.save(post), PostsVO::class.java)
+        return if (user != null){
+                postsVO.userID = user.toVO()
+                val post: Posts = postsVO.toEntity()
+                postsRepository.save(post).toVO()
+            }else throw ResourceNotFoundException("User not found")
+
+
+
+
     }
 
 //    fun update(PostsVO: PostsVO): PostsVO{

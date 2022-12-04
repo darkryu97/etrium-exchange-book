@@ -19,7 +19,7 @@ spring:
   flyway:
     user: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
-    schemas: ${RDS_DB_NAME}
+#    schemas: ${RDS_DB_NAME}
 
 #spring-doc:
 #  paths-to-match:

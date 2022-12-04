@@ -9,4 +9,7 @@ interface UserRepository : JpaRepository<User?, Long?>{
 
     @Query("SELECT u FROM User u WHERE u.email =:email")
     fun findByEmail(@Param("email") email: String?): User?
+
+//    @Query("INSERT INTO User (name,email, password,accountNonExpired, accountNonLocked,credentialsNonExpired,enabled) VALUES (:user.name,:user.email,:user.password,:1,:1,:1,:1")
+//    fun createNewUser(@Param("user") user: User?): User?
 }
